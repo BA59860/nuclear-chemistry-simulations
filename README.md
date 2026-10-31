@@ -1,39 +1,48 @@
-[README.md](https://github.com/user-attachments/files/34220814/README.md)
-# nuclear-chemistry-simulations
-Interactive nuclear chemistry simulation worksheets
-# Nuclear Chemistry Simulations: CHMY 121 Interactive Worksheet
+# Nuclear Chemistry Simulations
 
-A self-contained, no-build, browser-only pilot of the eight-page nuclear simulation worksheets. It follows the original **Part I Alpha Decay**, **Part II Beta Decay**, and **Part III Radioactive Dating** sequence, preserving the written-response prompts, four adjustable pie charts for predictions and four for observations in each half-life investigation, and editable observation/trial tables.
+A buildless, unbranded CHMY 121 worksheet for GitHub Pages. All three parts, original question wording, embedded reference illustrations, editable pie charts, and dynamic tables from the supplied `nuclear-simulations.html` are retained. The earlier GitHub Pages prototype supplies the JSON progress-backup and recommended PDF-submission workflow.
 
-## Publish using GitHub Pages
-1. Create a new GitHub repository (e.g., `nuclear-chemistry-simulations`).
-2. Upload `index.html` to the repository's root (or push the files with Git).
-3. In the repository, open **Settings → Pages**, select **Deploy from a branch**, choose `main` and `/(root)`, then Save.
-4. Open the GitHub Pages URL from Settings once deployed. No build tools or third-party JS libraries are needed.
+## Students: save and submit
 
-## Student workflow
-1. Open the web worksheet and enter name/section.
-2. Open each linked PhET simulation and complete the questions.
-3. Enter values into editable data tables and drag sliders to color pie charts.
-4. Select **Save Backup** periodically to download a `.json` progress backup. **Restore Backup** reopens it later, including on a different computer.
-5. Select **Print / Save PDF** and choose **Save as PDF** in the browser print dialog. Save the entire document, review the PDF for complete answers, and upload that single PDF to the existing Canvas assignment.
+1. Complete the worksheet while using the linked PhET simulations.
+2. Check the save status at the bottom. Work is stored in this browser and site address, not in an account or on a server. Private browsing, browser cleanup, changing addresses, or changing devices can remove or isolate it.
+3. Download **Save JSON backup** regularly. Use **Import JSON backup** to resume on another browser/device. Import asks before replacing current answers. JSON is a progress backup, not a PDF.
+4. **Recommended:** choose **Print / Save PDF · Recommended**, select Save as PDF in the browser/system print dialog, review all three parts, and upload the PDF file to Canvas. Turn off browser headers/footers if desired. This is one PDF; students do not need to ZIP it. The downloadable ZIP in this package is for deploying the website.
+5. Nothing is automatically sent to Canvas.
 
-### Pilot notes and limitations
-- **No submissions are sent automatically.** GitHub Pages is static hosting. Canvas remains the actual submission point.
-- Student responses are saved only in the browser's `localStorage`. Clearing browser data, private browsing, switching devices, or device loss can erase that data. Downloaded JSON backups make recovery possible. The website does not transmit or store names or answers on GitHub.
-- Browser printing is not guaranteed to behave identically across all browsers. Test in Chrome, Edge and Safari with long answers and all three parts before inviting students. The Print / Save PDF button invokes the browser's print dialog (it does not upload a file or synthesize PDFs on a server).
-- Text input boxes support normal text and pasted Unicode isotope notation; there is not yet an equation editor or rich-text table insertion tool.
-- The original worksheet repeated the label '2(a)' within Part II. This version uses 2(a)–2(f) for a unique sequence and fixes the accidentally repeated 'Part II' heading on radioactive dating to Part III.
-- The original beta-decay section asks about **carbon-10**. Carbon-10 undergoes positron emission (β⁺), not the β⁻ process shown by the other examples. This version preserves the isotope and explains the distinction.
-- The source's trial table says 'relative numbers of starting substance and decay product' without specifying table notation. This digital version asks for the count of **parent atoms remaining** per trial, with daughter atoms inferred as `40 - parent`.
-- Pie charts are adjusted in whole percentages and the displayed atom counts are rounded estimates. Recorded values do not claim deterministic decay.
-- This is a **volunteer pilot**, not a replacement for the original accessible downloadable PDF until tested by students.
+## Optional experimental submission links
 
-## Files
-- `index.html`: entire static application including CSS and JavaScript. No dependencies.
-- `README.md`: setup and student/instructor guidance.
+Use only if the instructor accepts URL submissions. Generate a fresh link after editing, then copy it to Canvas. Links contain the student's name and entire worksheet, compressed but **not encrypted**. Anyone who receives a link can read it. History synchronization, clipboard tools, and the destination service may retain it. No shortener or server is involved.
 
-The original worksheet credits Trish Loeblein and Phil Cook, PhET Teaching Ideas and Activities (June 2020, AW). PhET simulations are linked externally and are not reproduced or hosted in this project.
+- A complete URL is limited to **8,000 characters**, including its hosted base address. Longer links are blocked and cannot be copied. Incoming oversized links are also blocked. This is a conservative application policy, not a promise that Canvas or every browser accepts links of that length; PDF is preferred.
+- Links require an HTTP(S) hosted page and a browser with native gzip `CompressionStream` / `DecompressionStream`. Unsupported browsers can still use the worksheet, backups, and PDF workflow.
+- Links open a read-only snapshot. They never replace the viewer's locally saved worksheet. The viewer can print the snapshot or download its JSON backup. Opening a link does not prove that Canvas received it.
+- The version-2 gzip link format is not compatible with the earlier Claude LZ-String `#s=` links. Unsupported, malformed, oversized, or invalid links show a visible error instead of displaying saved local answers.
 
-## Compatibility with the first pilot
-The existing browser storage key and JSON backup format intentionally retain their original internal identifiers so students can restore earlier work. These identifiers are not student-facing branding.
+## Deploy on GitHub Pages
+
+Prepared for [BA59860/nuclear-chemistry-simulations](https://github.com/BA59860/nuclear-chemistry-simulations), serving [the worksheet site](https://ba59860.github.io/nuclear-chemistry-simulations/). Deployment is not verified until the updated files are committed and GitHub Pages finishes publishing.
+
+1. Extract this ZIP. Place `index.html` at the root of the intended repository (or in its configured Pages folder). `README.md` and `VERIFICATION.md` may be included alongside it.
+2. In the repository's **Settings → Pages**, select the intended branch and folder for deployment.
+3. Visit the Pages address after deployment. Test a JSON download/import, PDF, and optional submission link on that exact address before assigning the worksheet.
+
+There is no build command, npm dependency, API key, CDN script, analytics, or backend. Fonts use local fallbacks. Reference pictures are embedded in `index.html`. The worksheet runs from a downloaded file too; use the hosted address for consistent browser storage and to generate submission links. Internet access is needed to open PhET and reference sources.
+
+## Recovery and validation
+
+- Autosave writes immediately on edits. Storage errors stay visible; download a JSON backup if saving fails. A failed write leaves the visible answers available.
+- Another tab changing the saved worksheet pauses autosave in the stale tab. Download that tab's JSON backup before using **Load saved browser copy**. This guards against ordinary conflicting edits; it is not a collaborative editor or transactional multi-user database.
+- Unreadable or invalid stored data is left untouched. Restore a valid backup to recover; do not clear site data until recovery options are exhausted.
+- JSON imports validate format, known answer fields, string values, table dimensions, fixed trial-table shape, and integer pie counts before replacing anything. File limit: 1,000,000 bytes. Dynamic tables support 1–100 rows and 1–12 columns. Worksheet answer data is limited to just under 1 MB; shorter responses improve usability.
+- New backups use `format: "nuclear-chemistry-progress-v2"`, `savedAt`, and `answers`. Valid raw Claude autosave data under `chmy121-nuclear-sims-v1` is read on startup. The earlier `nuclearforge-pilot-v1` prototype has different fields and is **not** an import-compatible backup; keep those files separately. No speculative conversion is performed.
+- Table-removal buttons ask before deleting the final row/column. Paste into editable cells inserts plain text. Imported and shared text is rendered as text, not HTML.
+- Link decoding limits expanded data to 1 MB and validates the same schema as JSON import. Links are round-trip checked before being offered. Editing invalidates an already generated link.
+
+## Scientific clarification
+
+The original carbon-10 beta-decay prompt remains unchanged. A short adjacent note distinguishes positron emission (β⁺) from the β⁻ decay shown by the simulation. Source: [MIT OpenCourseWare, Radioactive Decay, Part II](https://ocw.mit.edu/courses/22-02-introduction-to-applied-nuclear-physics-spring-2012/0dedac3694d87c637b6214fd85c9eec9_MIT22_02S12_lec_ch7.pdf).
+
+Original worksheet acknowledgment to Trish Loeblein and Phil Cook / PhET is retained. No CFL branding is present. No ownership or redistribution rights beyond the supplied materials are asserted.
+
+See `VERIFICATION.md` for performed checks and their limits.

@@ -1,72 +1,716 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nuclear Chemistry Simulations</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nuclear Chemistry Simulations</title>
 <style>
-:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#203044;background:#f2f5fa}*{box-sizing:border-box}body{margin:0}header{background:#152d50;color:white;padding:22px max(20px,calc((100vw - 1060px)/2))}h1{margin:0;font-size:1.7rem}header p{margin:6px 0 0;color:#deebff}.shell{max-width:1060px;margin:auto;padding:20px}.toolbar{background:white;border:1px solid #d8e0ea;box-shadow:0 3px 16px #20304410;border-radius:12px;padding:14px;display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:20px}button,.btn{cursor:pointer;border-radius:7px;border:1px solid #8ea4bd;background:#fff;color:#183458;font-size:.92rem;padding:10px 13px;font-weight:650;text-decoration:none}button:hover,.btn:hover{background:#eaf2ff}.primary{background:#315bd4;color:#fff;border-color:#315bd4}.primary:hover{background:#2448b3}.danger{color:#a92424}.save{font-size:.8rem;color:#477259;margin-left:auto}.notice{padding:12px 15px;background:#fff8e8;border-left:4px solid #da9d22;border-radius:6px;margin-bottom:15px}.student{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px;background:white;border:1px solid #d8e0ea;border-radius:10px;margin-bottom:18px}.student label{display:grid;gap:5px;font-size:.85rem;font-weight:700}.student input{padding:10px;border:1px solid #acbbc9;border-radius:6px;font:inherit}.parts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.parttab{flex:1;min-width:180px}.parttab.active{background:#26456f;color:#fff}.part{background:#fff;border:1px solid #dce4ee;border-radius:12px;padding:28px;margin-bottom:20px}.part h2{color:#1b4478;margin:0 0 6px}.parthead{border-bottom:2px solid #cbdcf1;margin-bottom:16px;padding-bottom:12px}.simlink{color:#2458bf;font-weight:650}.question{margin:24px 0;border-top:1px solid #e4e9f2;padding-top:18px;break-inside:avoid}.question h3{font-size:1.03rem;color:#1d3553;margin:0 0 9px}.prompt{line-height:1.6;margin:6px 0 12px}.answer{display:block;width:100%;min-height:96px;resize:vertical;border:1px solid #a7bacf;border-radius:7px;padding:12px;font:inherit;line-height:1.5;background:#fbfdff}.answer:focus,input:focus{outline:2px solid #7e9aff}.tablewrap{width:100%;overflow:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th{background:#eaf1fc}td,th{border:1px solid #aec0d7;padding:7px;text-align:center}td:first-child{font-weight:700;white-space:nowrap}table input{border:1px solid transparent;min-width:60px;width:100%;text-align:center;padding:8px 3px;border-radius:3px;background:#f8fbff;font:inherit}table input:focus{background:#fff;border-color:#315bd4}.piegrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.pie{border:1px solid #dae2ed;border-radius:9px;padding:10px;text-align:center;break-inside:avoid}.pie svg{display:block;width:100%;max-width:158px;margin:6px auto}.pie input[type=range]{width:100%;accent-color:#614fc2}.pie .counts{font-size:.79rem;line-height:1.5}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.85rem;margin:10px 0}.swatch{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px}.small{font-size:.85rem;color:#546a83}.footer{text-align:center;color:#576b81;font-size:.87rem;padding:10px 0 40px}.printonly{display:none}.source{font-size:.78rem;color:#67788b}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}.hidden{display:none!important}
-@media(max-width:650px){.piegrid{grid-template-columns:repeat(2,1fr)}.student{grid-template-columns:1fr}.part{padding:16px}.save{width:100%}}
-@media print{@page{size:letter;margin:.58in}body{background:white;font-size:10pt}header{background:white;color:#1b3553;padding:0 0 8px}header p{color:#444}.shell{padding:0;max-width:100%}.toolbar,.parts,.notice,.footer,.noprint,.print-instructions{display:none!important}.part{display:block!important;border:none;padding:0;margin:0;border-radius:0}.part:not(:first-child){break-before:page}.parthead{margin-top:10px}.student{border:1px solid #bbb;margin:12px 0;grid-template-columns:1fr 1fr}.student input{border:none;border-bottom:1px solid #777;padding:4px}.question{break-inside:auto;page-break-inside:avoid;margin:15px 0;padding-top:10px}.answer{border:1px solid #ccc;min-height:65px;resize:none;height:auto!important;overflow:visible;white-space:pre-wrap;background:white}.piegrid{gap:5px}.pie{padding:4px}.pie svg{max-width:112px}.pie input[type=range]{display:none}.pie .counts{font-size:8pt}table input{background:transparent;padding:2px}.printonly{display:block}.source{display:none}}
-</style></head><body>
-<header><h1>☢️ Nuclear Chemistry Simulations</h1><p>Nuclear Chemistry Simulation Worksheets · Interactive pilot · CHMY 121</p></header>
-<main class="shell">
-<div class="notice"><strong>Experimental online option.</strong> Your work stays in this browser unless you download it or submit it yourself. Use <strong>Save Backup</strong> regularly. To submit, select <strong>Print / Save PDF</strong>, save the entire completed worksheet as one PDF, and upload that file to Canvas. The downloadable original worksheet remains an alternative.</div>
-<div class="toolbar"><button class="primary" id="print">🖨️ Print / Save PDF</button><button id="backup">⬇️ Save Backup</button><button id="restore">⬆️ Restore Backup</button><input id="backupfile" type="file" accept="application/json,.json" hidden><button class="danger" id="clear">Clear My Work</button><span class="save" id="status" role="status">Saving locally</span></div>
-<div class="student"><label>Student name<input data-key="student.name" placeholder="Your name" autocomplete="name"></label><label>Class / section<input data-key="student.section" placeholder="CHMY 121"></label><label>Date<input type="date" data-key="student.date"></label><label>Lab partner (if applicable)<input data-key="student.partner" placeholder="Optional"></label></div>
-<nav class="parts noprint" aria-label="Investigations"><button class="parttab active" data-tab="alpha">Part I · Alpha Decay</button><button class="parttab" data-tab="beta">Part II · Beta Decay</button><button class="parttab" data-tab="dating">Part III · Dating</button><button class="parttab" data-tab="all">View all</button></nav>
-<div id="content"></div><div class="footer">Based on the provided Nuclear Chemistry Simulation Worksheets (June 2020, AW). Original acknowledgment: Trish Loeblein and Phil Cook, PhET Teaching Ideas and Activities. Interactive worksheet pilot · No accounts, server or automatic Canvas submission.</div>
-</main><script>
-'use strict';
-const links={alpha:'https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=alpha-decay',beta:'https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=beta-decay',dating:'https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=radioactive-dating-game'};
-const spec=[{id:'alpha',title:'Part I: Investigation of Alpha Decay via Simulation',sim:'Alpha Decay',items:[
-['text','a1a','1(a). Investigating Alpha Decay','Click the Single Atom tab and observe the decay of polonium-211. Use Reset Nucleus to watch the process repeatedly. Write a description of what happens during the alpha decay of an atom.'],
-['text','a1b','1(b). Custom Atom','Now check your ideas by selecting the “Custom” atom and letting the simulation run. Reflect on your ideas and write any new ideas you might have.'],
-['text','a1c','1(c). Using the Chart','Did you find the chart at the top helpful or not? Explain.'],
-['text','a1d','1(d). Verify Your Ideas','Use the periodic table or other sources to determine the differences between polonium-211 and lead-207. Explain what alpha decay means and cite at least one valid source. Include your citation(s).'],
-['text','a1e','1(e). Balanced Alpha-Decay Reactions','Predict the products and write balanced nuclear reactions for radium-226, plutonium-240, and uranium-238 undergoing alpha decay.'],
-['matrix','a2a','2(a). Investigating Half-Life: Data Table','Use the Multiple Atoms tab and the chart at the top to test ideas about half-life. Use multiple samples and substances with different half-lives. Create a data table of your tests.', ['Sample / substance','Half-life','Initial amount','Time elapsed','Amount remaining'],4],
-['text','a2b','2(b). Explain Half-Life','In your own words, describe what half-life means.'],
-['pies','a2c','2(c). Predict the Pie Charts','Without using the simulation, predict how a sample of 40 atoms with a half-life of 1.5 seconds changes over time. Adjust the pie charts to show the relative parent atoms and alpha decay products.',[0.5,1.0,1.5,2.0],40,'seconds','Prediction'],
-['pies','a2d','2(d). Observe the Pie Charts','Use the Custom atom in the simulation to test the same scenario. Adjust these pie charts to match your actual observations. Pause and Step may help.',[0.5,1.0,1.5,2.0],40,'seconds','Observation'],
-['text','a3','3. Predictions Versus Results','How do your predictions compare to the results shown in the simulation?'],
-['matrix','a4','4. Multiple Trials','Run the simulation repeatedly with the same 40-atom, 1.5-second half-life scenario. Compare multiple trials. For each time and trial, enter the number of parent atoms remaining; the remaining atoms are the decay product.', ['Time (s)','Trial 2','Trial 3','Trial 4','Trial 5'],[0,0.5,1.0,1.5,2.0]],
-['text','a5','5. Explain the Differences','What ideas do you have to explain the similarities and differences in the data and also your predictions?'],
-['text','a6','6. Try Another Substance','Try another substance with a different half-life. Describe your test, results, and conclusions.'],
-['text','a7','7. Small Versus Large Samples','Is it reasonable to assume that if you start with 10 atoms of polonium, that 0.5 seconds later only 5 will remain? What if you start with 500 atoms? Explain.']
-]},{id:'beta',title:'Part II: Investigation of Beta Decay via Simulation',sim:'Beta Decay',items:[
-['text','b1a','1(a). Investigating Beta Decay','Click the Single Atom tab and observe the decay of hydrogen-3 and carbon-14. Use Reset Nucleus repeatedly. Describe what happens during beta decay.'],
-['text','b1b','1(b). Custom Atom','Select the “Custom” atom and let the simulation run. Reflect on your ideas and write any new ideas.'],
-['text','b1c','1(c). Verify Your Ideas','Use reliable online resources to determine the differences between hydrogen-3 and helium-3, and between carbon-14 and nitrogen-14. Explain what beta decay means and cite at least one valid source.'],
-['text','b1d','1(d). Balanced Beta-Decay Reactions','Predict the products and write balanced nuclear reactions for carbon-10, cesium-137, and thorium-234. Note: The original worksheet lists carbon-10 here; carbon-10 undergoes positron emission (β⁺), unlike the β⁻ emission illustrated by the other two nuclei. Identify and account for the distinction.'],
-['text','b1e','1(e). Sequential Decay','Predict what happens when uranium-238 undergoes alpha decay followed by beta decay. Write both balanced nuclear reactions.'],
-['matrix','b2a','2(a). Investigating Half-Life: Data Table','Using the Multiple Atoms tab, test half-life using multiple samples and substances. Record your observations.', ['Sample / substance','Half-life','Initial amount','Time elapsed','Amount remaining'],4],
-['text','b2b','2(b). Define Half-Life','In your own words, describe what half-life means for beta decay.'],
-['pies','b2c','2(c). Predict the Pie Charts','Without using the simulation, predict how 100 radioactive atoms with a half-life of 20 years change. Adjust the pie charts to show the proportion of parent atoms and beta decay products.',[5,10,20,30],100,'years','Prediction'],
-['pies','b2d','2(d). Observe the Pie Charts','Use the Custom atom to test your scenario. Adjust the pie charts to match your observations. Pause and Step may help.',[5,10,20,30],100,'years','Observation'],
-['text','b2e','2(e). Predictions Versus Results','How do your predictions compare to the results shown in the simulation?'],
-['text','b2f','2(f). Explain Similarities and Differences','What ideas do you have to explain the similarities and differences in the data and your predictions?'],
-['text','b3','3. Compare Alpha and Beta Decay','Compare and contrast the alpha and beta decay processes, including the meaning of half-life for each process.']
-]},{id:'dating',title:'Part III: Investigation of Radioactive Dating via Simulation',sim:'Radioactive Dating Game',items:[
-['text','d1','1. Explore the Simulation','Explore all tabs of the simulation. Your goal is to figure out why there is more than one element used to estimate the age of objects. Record your observations.'],
-['text','d2','2. Choosing Isotopes','Which elements’ isotopes are used to estimate how old something is? Why do scientists use more than one type? Be specific; it is not simply to get repeated results.'],
-['text','d3a','3(a). Carbon-14 or Uranium-238?','Pretend you are a scientist with a tool like the one on the Dating Game tab. How do you decide which to use: carbon-14 or uranium-238?'],
-['text','d3b','3(b). Percentage Remaining','How does the percentage remaining help you estimate the age of an object?'],
-['text','d3c','3(c). Fish Fossil','If you cannot get a reading directly on an object such as the fish fossil, what else can you try? Determine the approximate age of the fish fossil and explain your method.'],
-['text','d4','4. Forensic Dating','If you were a forensic scientist and found a buried corpse, could you use one of the isotopes in the simulation to determine how long ago the person died? Explain.'],
-['text','d5','5. Nuclear Reactions','What type of nuclear reaction do carbon-14 and uranium-238 undergo? Explain how you figured this out and write a balanced nuclear reaction for each.']
-]}];
-const STORE='nuclearforge-pilot-v1';let state={};try{state=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){state={}};let active='alpha';
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function set(key,value){state[key]=value;try{localStorage.setItem(STORE,JSON.stringify(state));document.getElementById('status').textContent='✓ Saved in this browser'}catch(e){document.getElementById('status').textContent='⚠ Browser saving unavailable; download backup'}}
-function field(key,placeholder='Type your response here…'){return `<textarea class="answer" data-key="${esc(key)}" aria-label="Answer for ${esc(key)}" placeholder="${esc(placeholder)}">${esc(state[key]||'')}</textarea>`}
-function table(item){let [_,id,title,prompt,cols,rows]=item,labels=Array.isArray(rows)?rows:Array.from({length:rows},(_,i)=>i+1);return `<div class="tablewrap"><table><thead><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${labels.map((r,i)=>`<tr>${cols.map((c,j)=>{let k=`${id}.${i}.${j}`;if(j===0&&Array.isArray(rows))return `<td>${esc(r)}</td>`;return `<td><input aria-label="${esc(c)}, row ${i+1}" data-key="${esc(k)}" value="${esc(state[k]||'')}"></td>`}).join('')}</tr>`).join('')}</tbody></table></div>`}
-function sector(p){let x=60+48*Math.sin(Math.PI*2*p/100),y=60-48*Math.cos(Math.PI*2*p/100);if(p<=0)return '';if(p>=100)return '<circle cx="60" cy="60" r="48" fill="#5b50bd"/>';return `<path d="M60 60 L60 12 A48 48 0 ${p>50?1:0} 1 ${x.toFixed(3)} ${y.toFixed(3)} Z" fill="#5b50bd"/>`}
-function pies(item){let [_,id,title,prompt,times,total,unit,phase]=item;return `<div class="legend"><span><i class="swatch" style="background:#5b50bd"></i>Parent nuclei</span><span><i class="swatch" style="background:#a9d4ec"></i>Decay products</span></div><div class="piegrid">${times.map((t,i)=>{let k=`${id}.${i}`,p=Number(state[k]??100);return `<div class="pie"><strong>t = ${t} ${esc(unit==='seconds'?'s':'years')}</strong><svg viewBox="0 0 120 120" role="img" aria-label="${esc(phase)} pie chart at ${t} ${unit}"><circle cx="60" cy="60" r="48" fill="#a9d4ec"/><g id="sector-${k}">${sector(p)}</g><circle cx="60" cy="60" r="48" fill="none" stroke="#344b64" stroke-width=".8"/></svg><label class="noprint small" for="range-${k}">Adjust parent fraction</label><input id="range-${k}" aria-label="Parent fraction at ${t} ${unit}" data-pie="${k}" data-total="${total}" type="range" min="0" max="100" step="1" value="${p}"><div class="counts" id="count-${k}">${p}% parent · ${100-p}% product<br>≈${Math.round(total*p/100)} parent / ${total-Math.round(total*p/100)} product</div></div>`}).join('')}</div><p class="small print-instructions">Each pie chart represents the fraction of parent nuclei (purple) and decay products (light blue). Drag the slider under each chart to record your prediction or observation.</p>`}
-function question(item){let [type,id,title,prompt]=item;return `<section class="question"><h3>${esc(title)}</h3><p class="prompt">${esc(prompt)}</p>${type==='text'?field(id):type==='matrix'?table(item):pies(item)}</section>`}
-function render(){let root=document.getElementById('content');root.innerHTML=spec.map(part=>`<article class="part ${active!=='all'&&active!==part.id?'hidden':''}" data-part="${part.id}"><div class="parthead"><h2>${esc(part.title)}</h2><p>Open the <a class="simlink" target="_blank" rel="noopener noreferrer" href="${links[part.id]}">${esc(part.sim)} PhET simulation ↗</a> and use it to answer the following questions.</p></div>${part.items.map(question).join('')}</article>`).join('');root.querySelectorAll('textarea,input[data-key]').forEach(el=>el.addEventListener('input',e=>{set(el.dataset.key,el.value);if(el.tagName==='TEXTAREA'){el.style.height='auto';el.style.height=Math.max(96,el.scrollHeight+3)+'px'}}));root.querySelectorAll('textarea').forEach(el=>{el.style.height=Math.max(96,el.scrollHeight+3)+'px'});root.querySelectorAll('input[data-pie]').forEach(el=>el.addEventListener('input',()=>{let k=el.dataset.pie,p=+el.value,total=+el.dataset.total;set(k,p);document.getElementById('sector-'+k).innerHTML=sector(p);document.getElementById('count-'+k).innerHTML=`${p}% parent · ${100-p}% product<br>≈${Math.round(total*p/100)} parent / ${total-Math.round(total*p/100)} product` }));document.querySelectorAll('.parttab').forEach(b=>b.classList.toggle('active',b.dataset.tab===active));}
-function blobDownload(text,name,type){let a=document.createElement('a'),url=URL.createObjectURL(new Blob([text],{type}));a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-function safeFilename(){return (state['student.name']||'student').trim().replace(/[^a-z0-9_-]+/gi,'_').slice(0,40)||'student'}
-document.querySelectorAll('.student input').forEach(el=>{el.value=state[el.dataset.key]||'';el.addEventListener('input',()=>set(el.dataset.key,el.value))});document.querySelectorAll('.parttab').forEach(b=>b.addEventListener('click',()=>{active=b.dataset.tab;render();window.scrollTo({top:0,behavior:'smooth'})}));
-document.getElementById('print').addEventListener('click',()=>{document.querySelectorAll('.part').forEach(e=>e.classList.remove('hidden'));window.print();render()});
-document.getElementById('backup').addEventListener('click',()=>blobDownload(JSON.stringify({format:'nuclearforge-pilot-v1',savedAt:new Date().toISOString(),answers:state},null,2),`Nuclear_Chemistry_Simulations_${safeFilename()}_backup.json`,'application/json'));
-document.getElementById('restore').addEventListener('click',()=>document.getElementById('backupfile').click());document.getElementById('backupfile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{let data=JSON.parse(await f.text());if(data.format!=='nuclearforge-pilot-v1'||!data.answers||typeof data.answers!=='object'||Array.isArray(data.answers))throw Error('This is not a compatible worksheet backup.');if(!confirm('Restore this backup? This replaces the answers currently saved in this browser.'))return;state=data.answers;localStorage.setItem(STORE,JSON.stringify(state));document.querySelectorAll('.student input').forEach(el=>el.value=state[el.dataset.key]||'');render();alert('Backup restored.')}catch(err){alert('Could not restore backup: '+err.message)}finally{e.target.value=''}});
-document.getElementById('clear').addEventListener('click',()=>{if(!confirm('Permanently clear all your answers from this browser? Download a backup first if you might need your work.'))return;state={};localStorage.removeItem(STORE);document.querySelectorAll('.student input').forEach(el=>el.value='');render();document.getElementById('status').textContent='All answers cleared'});
-window.addEventListener('beforeprint',()=>{document.querySelectorAll('.part').forEach(e=>e.classList.remove('hidden'));document.querySelectorAll('textarea').forEach(t=>t.style.height=Math.max(96,t.scrollHeight+5)+'px')});window.addEventListener('afterprint',()=>render());render();
-</script></body></html>
+/* Layout: one readable column, like a lab worksheet; answer fields sit inside each question; a sticky bar holds save status and submit. */
+:root {
+  --paper: #f7f8f6;
+  --sheet: #ffffff;
+  --ink: #1d2427;
+  --muted: #5b676c;
+  --rule: #d6dcdc;
+  --field: #fbfcfb;
+  --parent: #1f6f78;      /* undecayed parent nuclei */
+  --product: #d08a2c;     /* decay product */
+  --focus: #1f6f78;
+  --warn-bg: #fff4e0;
+  --warn-ink: #7a4a00;
+  --ok: #2f7a4a;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121718; --sheet: #1a2123; --ink: #e5eaea; --muted: #9aa7aa; --rule: #34403f;
+    --field: #141a1b; --parent: #4fb3bd; --product: #e7a751; --focus: #4fb3bd;
+    --warn-bg: #3a2c12; --warn-ink: #f3cf8f; --ok: #6cc28c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121718; --sheet: #1a2123; --ink: #e5eaea; --muted: #9aa7aa; --rule: #34403f;
+  --field: #141a1b; --parent: #4fb3bd; --product: #e7a751; --focus: #4fb3bd;
+  --warn-bg: #3a2c12; --warn-ink: #f3cf8f; --ok: #6cc28c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.sheet {
+  max-width: 820px; margin: 0 auto; background: var(--sheet);
+  border: 1px solid var(--rule); border-radius: 6px;
+  padding-block: 28px 40px; padding-inline: clamp(16px, 5vw, 48px);
+  margin-block: 20px 120px;
+}
+h1, h2 { font-family: var(--font-display); text-wrap: balance; line-height: 1.2; }
+h1 { font-size: 1.85rem; margin: 0 0 4px; }
+.course { color: var(--muted); font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 20px; }
+h2 { font-size: 1.35rem; margin: 40px 0 8px; padding-top: 24px; border-top: 2px solid var(--ink); }
+h3 { font-size: 1.05rem; margin: 26px 0 6px; }
+p { margin: 8px 0; max-width: 68ch; }
+a { color: var(--parent); overflow-wrap: anywhere; }
+.directions { background: var(--field); border: 1px solid var(--rule); border-radius: 4px; padding: 10px 14px; }
+.note { color: var(--muted); font-style: italic; }
+.q { margin: 18px 0 22px; display: grid; grid-template-columns: 2.1rem minmax(0, 1fr); column-gap: 4px; }
+.q > .lbl { font-weight: 700; }
+.q > .body { min-width: 0; }
+.q.sub { margin-left: 1.2rem; }
+label.field-label { display: block; font-size: .85rem; color: var(--muted); margin: 10px 0 4px; }
+textarea, input[type=text], input[type=number] {
+  font: inherit; color: var(--ink); background: var(--field);
+  border: 1px solid var(--rule); border-radius: 4px; padding: 8px 10px; width: 100%;
+}
+textarea { min-height: 5.2em; resize: vertical; line-height: 1.5; }
+textarea:focus, input:focus, [contenteditable]:focus, button:focus-visible, svg.pie:focus-visible {
+  outline: 2px solid var(--focus); outline-offset: 2px;
+}
+.ident { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; margin-bottom: 8px; }
+.ident > div { flex: 1 1 260px; min-width: 0; }
+.ident label { display: block; font-weight: 700; margin-bottom: 4px; }
+
+/* Nuclear equations */
+.eqs { display: grid; gap: 10px; margin-top: 8px; }
+.eq { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-family: var(--font-mono); font-size: .95rem; }
+.eq .start { min-width: 8.5rem; font-weight: 500; }
+.eq input { width: 9.5rem; font-family: var(--font-mono); font-size: .95rem; }
+.eq .op { color: var(--muted); }
+.hint { font-size: .85rem; color: var(--muted); margin-top: 6px; }
+
+/* Tables */
+.tbl-wrap { overflow-x: auto; margin-top: 8px; }
+table.data { border-collapse: collapse; min-width: 100%; font-variant-numeric: tabular-nums; }
+table.data th, table.data td { border: 1px solid var(--rule); padding: 0; min-width: 6.5rem; }
+table.data th { background: var(--field); }
+table.data [contenteditable] { padding: 7px 9px; min-height: 2.2em; outline-offset: -2px; }
+table.data th [contenteditable] { font-weight: 700; }
+table.data td.fixed, table.data th.fixed { padding: 7px 9px; font-weight: 700; text-align: center; }
+[contenteditable]:empty::before { content: attr(data-ph); color: var(--muted); opacity: .6; }
+.tbl-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+button {
+  font: inherit; font-size: .9rem; color: var(--ink); background: var(--sheet);
+  border: 1px solid var(--rule); border-radius: 4px; padding: 6px 12px; cursor: pointer;
+}
+button:hover { border-color: var(--muted); }
+button.primary { background: var(--parent); color: var(--sheet); border-color: var(--parent); font-weight: 700; }
+
+/* Pie charts */
+.pies-head { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .9rem; color: var(--muted); margin: 10px 0 4px; }
+.key { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.pies { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 6px; }
+.pie-card { border: 1px solid var(--rule); border-radius: 6px; padding: 10px; text-align: center; background: var(--field); }
+.pie-card .t { font-family: var(--font-mono); font-size: .9rem; font-weight: 500; margin-bottom: 4px; }
+svg.pie { width: 100%; max-width: 130px; aspect-ratio: 1; cursor: pointer; touch-action: none; display: block; margin: 0 auto; }
+.pie-ctrl { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 6px; font-size: .85rem; flex-wrap: wrap; }
+.pie-ctrl input { width: 4.4rem; padding: 4px 6px; text-align: center; font-family: var(--font-mono); }
+.pie-read { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); margin-top: 4px; }
+.pie-card.unset svg .slice { opacity: .25; }
+
+img.inline { vertical-align: middle; height: 1.5em; width: auto; border-radius: 3px; }
+img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; border-radius: 4px; border: 1px solid var(--rule); }
+
+/* Submit bar */
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+  background: var(--sheet); border-top: 1px solid var(--rule);
+  padding-block: 10px calc(10px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.bar-inner { max-width: 820px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.bar .status { color: var(--muted); font-size: .85rem; margin-right: auto; }
+.panel { max-width: 820px; margin: 10px auto 0; display: grid; gap: 8px; }
+.panel textarea { min-height: 4.5em; font-family: var(--font-mono); font-size: .8rem; }
+.msg { font-size: .9rem; }
+.msg.ok { color: var(--ok); }
+.banner { background: var(--warn-bg); color: var(--warn-ink); border-radius: 4px; padding: 10px 14px; margin-bottom: 16px; font-weight: 700; }
+.credit { margin-top: 40px; font-size: .9rem; color: var(--muted); }
+.print-copy { display: none; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+@media print {
+  body { background: #fff; color: #000; font-size: 11pt; padding: 0; }
+  .pie-card, .sw, svg.pie { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  [contenteditable]:empty::before { content: ""; }
+  .sheet { border: 0; margin: 0; padding: 0; max-width: none; }
+  .bar, .tbl-tools, .pie-ctrl, .no-print, .banner { display: none !important; }
+  textarea { display: none; }
+  .print-copy { display: block; white-space: pre-wrap; border: 1px solid #999; border-radius: 3px; padding: 6px 8px; min-height: 2em; }
+  input[type=text] { border: 0; border-bottom: 1px solid #000; border-radius: 0; background: none; }
+  .q, .pie-card, table.data { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  a { color: #000; }
+}
+
+.bar { max-height: 55vh; overflow-y: auto; }
+.sheet { margin-bottom: 220px; }
+.bar .status { flex-basis: 100%; }
+.panel { padding-bottom: 8px; }
+.panel textarea { max-height: 90px; }
+.science-note { font-size: .9rem; border-left: 3px solid var(--parent); padding-left: 10px; }
+@media print {
+ @page { size: auto; margin: 15mm; }
+ :root { --paper:#fff; --sheet:#fff; --ink:#000; --muted:#333; --rule:#aaa; --field:#fff; --parent:#1f6f78; --product:#d08a2c; color-scheme:light; }
+ .sheet { margin:0; }
+ input[data-key] { display:none; }
+ .q, table.data { break-inside:auto; }
+ tr, .eq { break-inside:avoid; }
+ .tbl-wrap { overflow:visible; }
+ table.data { table-layout:fixed; width:100%; font-size:9pt; }
+ table.data th, table.data td { min-width:0; overflow-wrap:anywhere; }
+ .eq .print-copy { min-width:5rem; max-width:100%; overflow-wrap:anywhere; }
+ .print-copy { overflow-wrap:anywhere; }
+ .pies { grid-template-columns:repeat(4,minmax(0,1fr)); }
+ h2 { break-before:page; }
+ h2:first-of-type { break-before:auto; }
+}
+</style>
+</head>
+<body>
+<main class="sheet" id="sheet">
+  <div class="banner" id="viewBanner" hidden></div>
+
+  <h1>Nuclear Chemistry Simulation Worksheets</h1>
+  <p class="course">CHMY 121 · Alpha decay, beta decay, half-life, and radioactive dating</p>
+
+  <div class="ident">
+    <div><label for="studentName">Your name</label><input type="text" id="studentName" data-key="name" autocomplete="name" placeholder="First and last name"></div>
+  </div>
+  <section class="directions no-print" aria-label="Save and submit instructions">
+<p><strong>Recommended submission: PDF → Canvas.</strong> Select <strong>Print / Save PDF</strong>, choose “Save as PDF” in the print dialog, check that all three parts and answers are included, then upload that PDF to Canvas. This page does not submit to Canvas automatically.</p>
+<p>Your work saves in this browser when storage is available. Download a <strong>JSON progress backup</strong> regularly and before changing browsers or devices. A backup is editable progress, not your submission PDF.</p>
+<details><summary>Optional submission link — experimental</summary><p>Only use a link if your instructor accepts it. It contains your name and all answers; anyone with it can read them. Compression is not encryption. Links can enter browser history, synced history, clipboard tools, and Canvas. Long links may be truncated or rejected; links over 8,000 characters are blocked. PDF upload is more reliable. A new link is needed after any changes.</p></details>
+</section>
+
+  <!-- ================= PART I ================= -->
+  <h2>Part I: Investigation of Alpha Decay via Simulation</h2>
+  <p class="directions"><strong>Directions:</strong> Open the <a href="https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=alpha-decay" target="_blank" rel="noopener">Alpha Decay simulation</a> and use it to answer the following questions.</p>
+
+  <h3>1. Investigating Alpha Decay:</h3>
+  <div class="q sub"><span class="lbl">a.</span><div class="body">
+    <p>Click on the <strong>Single Atom</strong> tab and observe the decay of polonium-211. Use the <strong>Reset Nucleus</strong> button to watch the process repeatedly. Write a description of what happens during the alpha decay of an atom.</p>
+    <textarea data-key="p1_1a" aria-label="Part I 1a answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">b.</span><div class="body">
+    <p>Now check your ideas by selecting the “Custom” atom and letting the simulation run. Reflect on your ideas and write any new ideas you might have below.</p>
+    <textarea data-key="p1_1b" aria-label="Part I 1b answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">c.</span><div class="body">
+    <p>Did you find the chart at the top helpful or not? Explain.</p>
+    <textarea data-key="p1_1c" aria-label="Part I 1c answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">d.</span><div class="body">
+    <p>Verify your ideas by using the periodic table or other resources to determine what the differences are between polonium (with a mass number of 211) and lead (with a mass number of 207). Also, use other resources to see what <strong><em>alpha decay</em></strong> means and cite at least one valid source.</p>
+    <textarea data-key="p1_1d" aria-label="Part I 1d answer"></textarea>
+    <label class="field-label" for="p1_1d_cite">Citation(s) here:</label>
+    <textarea id="p1_1d_cite" data-key="p1_1d_cite" style="min-height:3em"></textarea></div></div>
+  <div class="q sub"><span class="lbl">e.</span><div class="body">
+    <p>Practice using your ideas by predicting what would happen if the following nuclei undergo alpha decay. Make sure the nuclear reaction is balanced.</p>
+    <div class="eqs">
+      <div class="eq"><span class="start">Radium-226 →</span><input type="text" data-key="p1_e1a" aria-label="Radium-226 product 1"><span class="op">+</span><input type="text" data-key="p1_e1b" aria-label="Radium-226 product 2"></div>
+      <div class="eq"><span class="start">Plutonium-240 →</span><input type="text" data-key="p1_e2a" aria-label="Plutonium-240 product 1"><span class="op">+</span><input type="text" data-key="p1_e2b" aria-label="Plutonium-240 product 2"></div>
+      <div class="eq"><span class="start">Uranium-238 →</span><input type="text" data-key="p1_e3a" aria-label="Uranium-238 product 1"><span class="op">+</span><input type="text" data-key="p1_e3b" aria-label="Uranium-238 product 2"></div>
+    </div>
+    <p class="hint no-print">Write each product as name-mass number or symbol-mass number, for example Po-211 or polonium-211.</p></div></div>
+
+  <h3>2. Investigating Half-Life:</h3>
+  <p class="note">Note: Using the <strong>Multiple Atoms</strong> tab may be helpful.</p>
+  <div class="q sub"><span class="lbl">a.</span><div class="body">
+    <p>Use the chart at the top of the simulation to test ideas you might have about half-life. Make sure to use multiple samples and substances with a variety of half-lives. Create a data table below that shows the results of your tests.</p>
+    <div class="dtable" data-key="p1_2a_table"></div></div></div>
+  <div class="q sub"><span class="lbl">b.</span><div class="body">
+    <p>In your own words, describe what <strong><em>half-life</em></strong> means.</p>
+    <textarea data-key="p1_2b" aria-label="Part I 2b answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">c.</span><div class="body">
+    <p><strong>Without using the simulation</strong>, check your ideas by drawing predictions for the following scenario:</p>
+    <p>Suppose you have a radioactive substance that has a half-life of 1.5 seconds. Make predictions of what will happen by sketching the pie charts indicating the relative number of atoms of the substance and its alpha decay product for a reaction starting with <strong><u>40 total atoms</u></strong>.</p>
+    <div class="pieset" data-key="p1_2c" data-total="40" data-times="t = 0.5 s|t = 1.0 s|t = 1.5 s|t = 2.0 s" data-label="Predictions"></div></div></div>
+  <div class="q sub"><span class="lbl">d.</span><div class="body">
+    <p>Use the <strong>Custom</strong> atom in the simulation to test the above scenario. Copy the pie charts into the circles provided below. Note that using the <strong>Pause</strong> <img class="inline" alt="Pause button" src="data:image/png;base64,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"> and <strong>Step</strong> <img class="inline" alt="Step button" src="data:image/png;base64,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"> buttons may help.</p>
+    <div class="pieset" data-key="p1_2d" data-total="40" data-times="t = 0.5 s|t = 1.0 s|t = 1.5 s|t = 2.0 s" data-label="Simulation results"></div></div></div>
+
+  <div class="q"><span class="lbl">3.</span><div class="body">
+    <p>How do your predictions compare to the results shown in the simulation?</p>
+    <textarea data-key="p1_3" aria-label="Part I question 3 answer"></textarea></div></div>
+  <div class="q"><span class="lbl">4.</span><div class="body">
+    <p>Run the simulation for this scenario repeatedly and compare the results of multiple trials. Use the data table provided to show your results (relative numbers of starting substance and its decay product).</p>
+    <div class="ftable" data-key="p1_4_table" data-rows="0|0.5|1.0|1.5|2.0" data-cols="Time (s)|Trial 2|Trial 3|Trial 4|Trial 5"></div></div></div>
+  <div class="q"><span class="lbl">5.</span><div class="body">
+    <p>What ideas do you have to explain the similarities and differences in the data and also your predictions?</p>
+    <textarea data-key="p1_5" aria-label="Part I question 5 answer"></textarea></div></div>
+  <div class="q"><span class="lbl">6.</span><div class="body">
+    <p>Try another substance with a different half-life to see if your conclusions make sense. Describe your test, results, and conclusions.</p>
+    <textarea data-key="p1_6" aria-label="Part I question 6 answer"></textarea></div></div>
+  <div class="q"><span class="lbl">7.</span><div class="body">
+    <p>Practice using your ideas: Is it reasonable to assume that if you start with 10 atoms of polonium, that 0.5 s later only 5 will remain? What if you start with 500 atoms? Explain.</p>
+    <textarea data-key="p1_7" aria-label="Part I question 7 answer"></textarea></div></div>
+
+  <!-- ================= PART II ================= -->
+  <h2>Part II: Investigation of Beta Decay via Simulation</h2>
+  <p class="directions"><strong>Directions:</strong> Open the <a href="https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=beta-decay" target="_blank" rel="noopener">Beta Decay simulation</a> and use it to answer the following questions.</p>
+
+  <h3>1. Investigating Beta Decay:</h3>
+  <div class="q sub"><span class="lbl">a.</span><div class="body">
+    <p>Click on the <strong>Single Atom</strong> tab and observe the decay of hydrogen-3 and carbon-14. Use the <strong>Reset Nucleus</strong> button to watch the process repeatedly. Write a description of what happens in the beta decay of an atom.</p>
+    <textarea data-key="p2_1a" aria-label="Part II 1a answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">b.</span><div class="body">
+    <p>Now check your ideas by selecting the “Custom” atom and letting the simulation run. Reflect on your ideas and write any new ideas you might have below.</p>
+    <textarea data-key="p2_1b" aria-label="Part II 1b answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">c.</span><div class="body">
+    <p>Verify your ideas by using online resources to determine what the differences are between hydrogen-3 and helium-3, as well as carbon-14 and nitrogen-14. Also, use other resources to see what <strong><em>beta decay</em></strong> means and cite at least one valid source.</p>
+    <textarea data-key="p2_1c" aria-label="Part II 1c answer"></textarea>
+    <label class="field-label" for="p2_1c_cite">Citation(s) here:</label>
+    <textarea id="p2_1c_cite" data-key="p2_1c_cite" style="min-height:3em"></textarea></div></div>
+  <div class="q sub"><span class="lbl">d.</span><div class="body">
+    <p>Practice using your ideas by predicting what would happen if the following undergo beta decay:</p>
+    <p class="note science-note"><strong>Scientific note:</strong> The original prompt retains carbon-10. It undergoes positron emission (β⁺), whereas the simulation illustrates β⁻ decay. Account for that distinction in your carbon-10 reaction. <a href="https://ocw.mit.edu/courses/22-02-introduction-to-applied-nuclear-physics-spring-2012/0dedac3694d87c637b6214fd85c9eec9_MIT22_02S12_lec_ch7.pdf" target="_blank" rel="noopener">Reference: MIT radioactive decay notes</a>.</p>
+    <div class="eqs">
+      <div class="eq"><span class="start">Carbon-10 →</span><input type="text" data-key="p2_e1a" aria-label="Carbon-10 product 1"><span class="op">+</span><input type="text" data-key="p2_e1b" aria-label="Carbon-10 product 2"></div>
+      <div class="eq"><span class="start">Cesium-137 →</span><input type="text" data-key="p2_e2a" aria-label="Cesium-137 product 1"><span class="op">+</span><input type="text" data-key="p2_e2b" aria-label="Cesium-137 product 2"></div>
+      <div class="eq"><span class="start">Thorium-234 →</span><input type="text" data-key="p2_e3a" aria-label="Thorium-234 product 1"><span class="op">+</span><input type="text" data-key="p2_e3b" aria-label="Thorium-234 product 2"></div>
+    </div></div></div>
+  <div class="q sub"><span class="lbl">e.</span><div class="body">
+    <p>Practice using your ideas by predicting what would happen if uranium-238 undergoes alpha decay, followed by beta decay.</p>
+    <div class="eqs">
+      <div class="eq"><span class="start">Uranium-238 →</span><input type="text" data-key="p2_e4a" aria-label="Alpha decay product 1"><span class="op">+</span><input type="text" data-key="p2_e4b" aria-label="Alpha decay product 2"></div>
+      <div class="eq"><input type="text" data-key="p2_e5s" aria-label="Starting nucleus for beta decay" style="width:8.5rem"><span class="op">→</span><input type="text" data-key="p2_e5a" aria-label="Beta decay product 1"><span class="op">+</span><input type="text" data-key="p2_e5b" aria-label="Beta decay product 2"></div>
+    </div>
+    <p class="hint no-print">Use the first line for the alpha decay and the second line for the beta decay that follows.</p></div></div>
+
+  <h3>2. Investigating Half-Life for Beta Decay:</h3>
+  <p class="note">Note: Using the <strong>Multiple Atoms</strong> tab may be helpful once again.</p>
+  <div class="q sub"><span class="lbl">a.</span><div class="body">
+    <p>Use the charts at the top of the simulation to test ideas you might have about half-life. Make sure to use multiple samples and substances with a variety of half-lives. Create a data table below that shows the results of your tests.</p>
+    <div class="dtable" data-key="p2_2a_table"></div></div></div>
+  <div class="q sub"><span class="lbl">b.</span><div class="body">
+    <p>In your own words, describe what half-life means for beta decay.</p>
+    <textarea data-key="p2_2b" aria-label="Part II 2b answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">c.</span><div class="body">
+    <p><strong>Without using the simulation</strong>, check your ideas by drawing predictions for the following scenario:</p>
+    <p>Suppose you have a radioactive substance that has a half-life of 20 years. Make predictions of what will happen by sketching the pie charts indicating the relative number of atoms of the substance and its beta decay product for a reaction starting with <strong><u>100 total atoms</u></strong>.</p>
+    <div class="pieset" data-key="p2_2c" data-total="100" data-times="t = 5 years|t = 10 years|t = 20 years|t = 30 years" data-label="Predictions"></div></div></div>
+  <div class="q sub"><span class="lbl">d.</span><div class="body">
+    <p>Use the <strong>Custom</strong> atom in the simulation to test the above scenario. Copy the pie charts into the circles provided below. Note that using the <strong>Pause</strong> <img class="inline" alt="Pause button" src="data:image/png;base64,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"> and <strong>Step</strong> <img class="inline" alt="Step button" src="data:image/png;base64,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"> buttons may help.</p>
+    <div class="pieset" data-key="p2_2d" data-total="100" data-times="t = 5 years|t = 10 years|t = 20 years|t = 30 years" data-label="Simulation results"></div></div></div>
+  <div class="q sub"><span class="lbl">e.</span><div class="body">
+    <p>How do your predictions compare to the results shown in the simulation?</p>
+    <textarea data-key="p2_2e" aria-label="Part II 2e answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">f.</span><div class="body">
+    <p>What ideas do you have to explain the similarities and differences in the data and also your predictions?</p>
+    <textarea data-key="p2_2f" aria-label="Part II 2f answer"></textarea></div></div>
+  <div class="q"><span class="lbl">3.</span><div class="body">
+    <p>Compare and contrast the alpha and beta decay processes, including the meaning of half-life for each process.</p>
+    <textarea data-key="p2_3" aria-label="Part II question 3 answer"></textarea></div></div>
+
+  <!-- ================= PART III ================= -->
+  <h2>Part III: Investigation of Radioactive Dating via Simulation</h2>
+  <p class="directions"><strong>Directions:</strong> Open the <a href="https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=radioactive-dating-game" target="_blank" rel="noopener">Radioactive Dating Game simulation</a> and use it to answer the following questions.</p>
+
+  <div class="q"><span class="lbl">1.</span><div class="body">
+    <p>Explore the simulation, making sure to try all the tabs. Your goal is to figure out why there is more than one element used to estimate how old things might be.</p></div></div>
+  <div class="q"><span class="lbl">2.</span><div class="body">
+    <p>Which elements’ isotopes are used to estimate how old something is? Why do scientists use more than one type? (Be specific, it is <u>not</u> just to get repeated results!)</p>
+    <textarea data-key="p3_2" aria-label="Part III question 2 answer"></textarea></div></div>
+  <div class="q"><span class="lbl">3.</span><div class="body">
+    <p>Pretend you are a scientist and have a tool like the one on <strong>Dating Game</strong> tab:</p>
+    <img class="figure" alt="Dating Game probe with Carbon-14 and Uranium-238 options" src="data:image/png;base64,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" style="max-width:110px"></div></div>
+  <div class="q sub"><span class="lbl">a.</span><div class="body">
+    <p>How do you decide which to use: carbon-14 or uranium-238?</p>
+    <textarea data-key="p3_3a" aria-label="Part III 3a answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">b.</span><div class="body">
+    <p>How does the percentage <img class="inline" alt="Probe reading of 88.2 percent for carbon-14" src="data:image/png;base64,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" style="height:2.6em"> help you estimate the age?</p>
+    <textarea data-key="p3_3b" aria-label="Part III 3b answer"></textarea></div></div>
+  <div class="q sub"><span class="lbl">c.</span><div class="body">
+    <p>If you can’t get a reading on one object like the fish fossil <img class="inline" alt="Fish fossil" src="data:image/png;base64,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" style="height:2em">, what else can you try? Determine the approximate age of the fish fossil and explain what you did to estimate the fossil age.</p>
+    <textarea data-key="p3_3c" aria-label="Part III 3c answer"></textarea></div></div>
+  <div class="q"><span class="lbl">4.</span><div class="body">
+    <p>If you were a forensic scientist and found a buried corpse, could you use one of the isotopes in the simulation to figure out how long ago the person died? Explain.</p>
+    <textarea data-key="p3_4" aria-label="Part III question 4 answer"></textarea></div></div>
+  <div class="q"><span class="lbl">5.</span><div class="body">
+    <p>What type of nuclear reaction do carbon-14 and uranium-238 undergo? Explain how you figured this out and write the reaction for each.</p>
+    <textarea data-key="p3_5" aria-label="Part III question 5 answer"></textarea></div></div>
+
+  <p class="credit"><strong>Thanks to</strong> Trish Loeblein and Phil Cook, <strong>PhET Teaching Ideas and Activities:</strong> <a href="http://phet.colorado.edu/en/contributions/view/3221" target="_blank" rel="noopener">phet.colorado.edu/en/contributions/view/3221</a></p>
+</main>
+
+<div class="bar no-print" role="region" aria-label="Save and submit">
+ <div class="bar-inner">
+  <span class="status" id="status" role="status" aria-live="polite">Loading saved progress…</span>
+  <button type="button" class="primary" id="btnPdf">Print / Save PDF · Recommended</button>
+  <button type="button" id="btnBackup">Save JSON backup</button>
+  <button type="button" id="btnImport">Import JSON backup</button>
+  <input type="file" id="backupFile" accept="application/json,.json" hidden>
+  <button type="button" id="btnReload" hidden>Load saved browser copy</button>
+  <button type="button" id="btnLink">Experimental submission link</button>
+ </div>
+ <div class="panel" id="linkPanel" hidden>
+  <p class="msg" id="linkMsg" role="status"></p>
+  <textarea id="linkOut" readonly aria-label="Your submission link" hidden></textarea>
+  <div><button type="button" id="btnCopy" disabled>Copy link</button> <button type="button" id="btnClose">Close</button></div>
+ </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var STORE_KEY = "chmy121-nuclear-sims-v1";
+  var state = {};
+  var viewing = false;
+  var blocked = false;
+  var lastRaw = null;
+  var dirty = false;
+  var importBusy = false;
+  var FORMAT = "nuclear-chemistry-progress-v2";
+  var MAX_BYTES = 1000000, MAX_LINK = 8000;
+  var fields = Array.from(document.querySelectorAll("textarea[data-key], input[data-key]"), e => e.dataset.key);
+  var tables = Array.from(document.querySelectorAll(".dtable"), e => e.dataset.key);
+  var fixed = Array.from(document.querySelectorAll(".ftable"));
+  var pies = Array.from(document.querySelectorAll(".pieset"));
+  function plain(v) { return v && typeof v === "object" && !Array.isArray(v); }
+  function str(v) { if (typeof v !== "string" || v.length > MAX_BYTES) throw Error("Invalid or overlong answer."); return v; }
+  function validate(v) {
+    if (!plain(v)) throw Error("Answers must be an object.");
+    var allowed = fields.concat(tables, fixed.map(e=>e.dataset.key), pies.map(e=>e.dataset.key));
+    if (Object.keys(v).some(k=>!allowed.includes(k))) throw Error("Unrecognized worksheet field.");
+    var clean = {};
+    fields.forEach(k=>{if (v[k] !== undefined) clean[k] = str(v[k]);});
+    tables.forEach(k=>{ if (v[k] === undefined) return; var t=v[k];
+      if (!plain(t) || Object.keys(t).some(k=>!["head","rows"].includes(k)) || !Array.isArray(t.head) || t.head.length<1 || t.head.length>12 || !Array.isArray(t.rows) || t.rows.length<1 || t.rows.length>100) throw Error("Invalid table dimensions.");
+      clean[k]={head:t.head.map(str),rows:t.rows.map(r=>{if (!Array.isArray(r)||r.length!==t.head.length) throw Error("Invalid table row."); return r.map(str);})};
+    });
+    fixed.forEach(e=>{var k=e.dataset.key; if(v[k]===undefined)return; var t=v[k];
+      if(!Array.isArray(t)||t.length!==e.dataset.rows.split("|").length)throw Error("Invalid trial table.");
+      clean[k]=t.map(r=>{if(!Array.isArray(r)||r.length!==e.dataset.cols.split("|").length-1)throw Error("Invalid trial row."); return r.map(str);});
+    });
+    pies.forEach(e=>{var k=e.dataset.key;if(v[k]===undefined)return;var p=v[k];
+      if(!Array.isArray(p)||p.length!==e.dataset.times.split("|").length||p.some(n=>n!==null&&(!Number.isInteger(n)||n<0||n>+e.dataset.total)))throw Error("Invalid pie-chart value."); clean[k]=p.slice();
+    });
+    if(new TextEncoder().encode(JSON.stringify(clean)).length>MAX_BYTES-4096)throw Error("Worksheet exceeds the 1 MB limit. Shorten answers or tables.");
+    return clean;
+  }
+  function envelope() { return {format:FORMAT,savedAt:new Date().toISOString(),answers:validate(state)}; }
+  function unpack(v) { if(!plain(v)||v.format!==FORMAT||!plain(v.answers))throw Error("Not a compatible version-2 worksheet backup.");return validate(v.answers); }
+  function errorStatus(t) { setStatus(t); document.getElementById("status").style.color="var(--warn-ink)"; }
+  function conflict() { blocked=true; errorStatus("Autosave paused: another tab changed the saved copy. Download your JSON backup, then load the saved browser copy."); document.getElementById("btnReload").hidden=false; }
+
+
+  /* ---------- storage ---------- */
+  function load() {
+    try {
+      lastRaw = localStorage.getItem(STORE_KEY);
+      if (!lastRaw) return {};
+      var parsed = JSON.parse(lastRaw);
+      return parsed.format === FORMAT ? unpack(parsed) : validate(parsed);
+    } catch(e) {
+      blocked = true;
+      errorStatus("Saved progress could not be read. It has been left untouched. Import a JSON backup or download your current work before closing.");
+      return {};
+    }
+  }
+  function save() {
+    if (viewing) return;
+    dirty = true;
+    invalidateLink();
+    if(blocked) return;
+    try {
+      if(localStorage.getItem(STORE_KEY)!==lastRaw) { conflict(); return; }
+      var raw=JSON.stringify(envelope());
+      localStorage.setItem(STORE_KEY,raw);
+      lastRaw=raw; dirty=false;
+      document.getElementById("status").style.color="";
+      setStatus("Saved in this browser · " + new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}));
+    } catch(e) { errorStatus("Autosave unavailable: " + e.message + " Download a JSON backup now; keep this page open."); }
+  }
+  function setStatus(t) { document.getElementById("status").textContent=t; }
+  window.addEventListener("storage", function(e) { if(!viewing && (e.key===STORE_KEY || e.key===null) && e.newValue!==lastRaw) conflict(); });
+  window.addEventListener("beforeunload", function(e) { if(!viewing && dirty) { e.preventDefault(); e.returnValue=""; } });
+  document.addEventListener("visibilitychange", function() { if(document.hidden && dirty && !blocked) save(); });
+
+  /* ---------- text inputs ---------- */
+  function bindFields() {
+    document.querySelectorAll("textarea[data-key], input[data-key]").forEach(function (el) {
+      var k = el.dataset.key;
+      if (state[k] != null) el.value = state[k];
+      el.addEventListener("input", function () { state[k] = el.value; save(); grow(el); });
+      if (el.tagName === "TEXTAREA") grow(el);
+    });
+  }
+  function grow(el) { if (el.tagName !== "TEXTAREA") return; el.style.height = "auto"; el.style.height = Math.max(el.scrollHeight + 2, 70) + "px"; }
+
+  /* ---------- free-form data tables ---------- */
+  function buildDTable(host) {
+    var k = host.dataset.key;
+    var t = state[k] || { head: ["", "", ""], rows: [["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""]] };
+    state[k] = t;
+    function render() {
+      host.innerHTML = "";
+      var wrap = document.createElement("div"); wrap.className = "tbl-wrap";
+      var tb = document.createElement("table"); tb.className = "data";
+      var thead = tb.createTHead().insertRow();
+      t.head.forEach(function (h, j) {
+        var th = document.createElement("th"); thead.appendChild(th);
+        th.appendChild(cell(h, "Column heading (units)", function (v) { t.head[j] = v; }));
+      });
+      var body = tb.createTBody();
+      t.rows.forEach(function (r, i) {
+        var tr = body.insertRow();
+        r.forEach(function (v, j) { tr.insertCell().appendChild(cell(v, "", function (nv) { t.rows[i][j] = nv; })); });
+      });
+      wrap.appendChild(tb); host.appendChild(wrap);
+      var tools = document.createElement("div"); tools.className = "tbl-tools";
+      [["+ Row", function () { t.rows.push(t.head.map(function () { return ""; })); }],
+       ["− Row", function () { if (t.rows.length > 1) t.rows.pop(); }],
+       ["+ Column", function () { t.head.push(""); t.rows.forEach(function (r) { r.push(""); }); }],
+       ["− Column", function () { if (t.head.length > 1) { t.head.pop(); t.rows.forEach(function (r) { r.pop(); }); } }]
+      ].forEach(function (b) {
+        var btn = document.createElement("button"); btn.type = "button"; btn.textContent = b[0];
+        btn.addEventListener("click", function () {
+          if(b[0]==="+ Row" && t.rows.length>=100 || b[0]==="+ Column" && t.head.length>=12) { alert("Table limit: 100 rows and 12 columns."); return; }
+          if(b[0].startsWith("−") && !confirm("Remove the last " + (b[0].includes("Row")?"row":"column") + " and its answers?")) return;
+          b[1](); save(); render();
+        });
+        if (viewing) btn.disabled = true;
+        tools.appendChild(btn);
+      });
+      host.appendChild(tools);
+    }
+    render();
+  }
+  function cell(val, ph, onset) {
+    var d = document.createElement("div");
+    d.setAttribute("role", "textbox"); d.setAttribute("aria-label", ph || "Data table answer");
+    d.contentEditable = viewing ? "false" : "true";
+    d.textContent = val || ""; if (ph) d.dataset.ph = ph;
+    d.addEventListener("input", function () { onset(d.textContent); save(); });
+    d.addEventListener("paste", function(e) { e.preventDefault(); if(viewing)return; document.execCommand("insertText", false, e.clipboardData.getData("text/plain")); });
+    d.addEventListener("keydown", function (e) { if (e.key === "Enter") e.preventDefault(); });
+    return d;
+  }
+
+  /* ---------- fixed trial table ---------- */
+  function buildFTable(host) {
+    var k = host.dataset.key, rows = host.dataset.rows.split("|"), cols = host.dataset.cols.split("|");
+    var t = state[k] || rows.map(function () { return cols.slice(1).map(function () { return ""; }); });
+    state[k] = t;
+    var wrap = document.createElement("div"); wrap.className = "tbl-wrap";
+    var tb = document.createElement("table"); tb.className = "data";
+    var hr = tb.createTHead().insertRow();
+    cols.forEach(function (c) { var th = document.createElement("th"); th.className = "fixed"; th.textContent = c; hr.appendChild(th); });
+    var body = tb.createTBody();
+    rows.forEach(function (r, i) {
+      var tr = body.insertRow(); var c0 = tr.insertCell(); c0.className = "fixed"; c0.textContent = r;
+      cols.slice(1).forEach(function (_, j) { tr.insertCell().appendChild(cell(t[i][j], "parent / product", function (v) { t[i][j] = v; })); });
+    });
+    wrap.appendChild(tb); host.appendChild(wrap);
+    var h = document.createElement("p"); h.className = "hint no-print"; h.textContent = "In each cell, enter the number of starting atoms / decay-product atoms, for example 25 / 15.";
+    host.appendChild(h);
+  }
+
+  /* ---------- pie charts ---------- */
+  var NS = "http://www.w3.org/2000/svg";
+  function buildPies(host) {
+    var k = host.dataset.key, total = +host.dataset.total, times = host.dataset.times.split("|");
+    var vals = state[k] || times.map(function () { return null; });
+    state[k] = vals;
+    var head = document.createElement("div"); head.className = "pies-head";
+    head.innerHTML = '<strong style="color:var(--ink)">' + host.dataset.label + '</strong>' +
+      '<span class="key"><span class="sw" style="background:var(--parent)"></span>Starting substance</span>' +
+      '<span class="key"><span class="sw" style="background:var(--product)"></span>Decay product</span>' +
+      '<span class="no-print">Click or drag on a circle, or type a number.</span>';
+    host.appendChild(head);
+    var grid = document.createElement("div"); grid.className = "pies"; host.appendChild(grid);
+    times.forEach(function (tl, i) {
+      var card = document.createElement("div"); card.className = "pie-card";
+      var t = document.createElement("div"); t.className = "t"; t.textContent = tl; card.appendChild(t);
+      var svg = document.createElementNS(NS, "svg"); svg.setAttribute("viewBox", "0 0 120 120"); svg.setAttribute("class", "pie");
+      svg.setAttribute("role", viewing ? "img" : "slider"); svg.setAttribute("aria-valuemin", "0"); svg.setAttribute("aria-valuemax", total); svg.setAttribute("tabindex", "0");
+      var base = document.createElementNS(NS, "circle"); base.setAttribute("cx", 60); base.setAttribute("cy", 60); base.setAttribute("r", 54);
+      base.setAttribute("class", "slice"); base.setAttribute("fill", "var(--product)"); svg.appendChild(base);
+      var arc = document.createElementNS(NS, "path"); arc.setAttribute("class", "slice"); arc.setAttribute("fill", "var(--parent)"); svg.appendChild(arc);
+      var ring = document.createElementNS(NS, "circle"); ring.setAttribute("cx", 60); ring.setAttribute("cy", 60); ring.setAttribute("r", 54);
+      ring.setAttribute("fill", "none"); ring.setAttribute("stroke", "var(--ink)"); ring.setAttribute("stroke-width", "1.5"); svg.appendChild(ring);
+      card.appendChild(svg);
+      var ctrl = document.createElement("div"); ctrl.className = "pie-ctrl";
+      var id = k + "_" + i;
+      ctrl.innerHTML = '<label for="' + id + '">Starting atoms left:</label>';
+      var inp = document.createElement("input"); inp.type = "number"; inp.min = 0; inp.max = total; inp.step = 1; inp.id = id; inp.inputMode = "numeric";
+      ctrl.appendChild(inp); card.appendChild(ctrl);
+      var read = document.createElement("div"); read.className = "pie-read"; card.appendChild(read);
+      grid.appendChild(card);
+      if (viewing) { inp.disabled = true; }
+
+      function draw() {
+        var v = vals[i];
+        card.classList.toggle("unset", v == null);
+        var n = v == null ? total : v;
+        var f = n / total;
+        if (f >= 1) { arc.setAttribute("d", "M60,6 A54,54 0 1,1 60,114 A54,54 0 1,1 60,6 Z"); }
+        else if (f <= 0) { arc.setAttribute("d", ""); }
+        else {
+          var a = f * 2 * Math.PI, x = 60 + 54 * Math.sin(a), y = 60 - 54 * Math.cos(a);
+          arc.setAttribute("d", "M60,60 L60,6 A54,54 0 " + (f > .5 ? 1 : 0) + ",1 " + x.toFixed(2) + "," + y.toFixed(2) + " Z");
+        }
+        inp.value = v == null ? "" : v;
+        read.textContent = v == null ? "Not set yet" : v + " starting / " + (total - v) + " product";
+        svg.setAttribute("aria-label", host.dataset.label + " " + tl + ": " + read.textContent);
+        svg.setAttribute("aria-valuetext", read.textContent);
+        svg.setAttribute("aria-valuenow", n);
+      }
+      function setVal(n) {
+        if (viewing) return;
+        if (!Number.isFinite(n)) return;
+        n = Math.max(0, Math.min(total, Math.round(n)));
+        vals[i] = n; draw(); save();
+      }
+      function fromPointer(e) {
+        var r = svg.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        var ang = Math.atan2(dx, -dy); if (ang < 0) ang += 2 * Math.PI;
+        var n = ang / (2 * Math.PI) * total;
+        if (n < total * 0.02 && vals[i] != null && vals[i] > total * 0.9) n = total;
+        setVal(n);
+      }
+      var dragging = false;
+      svg.addEventListener("pointerdown", function (e) { if (viewing) return; dragging = true; try { svg.setPointerCapture(e.pointerId); } catch (x) {} fromPointer(e); });
+      svg.addEventListener("pointermove", function (e) { if (dragging) fromPointer(e); });
+      svg.addEventListener("pointerup", function () { dragging = false; });
+      svg.addEventListener("pointercancel", function () { dragging = false; });
+      svg.addEventListener("keydown", function (e) {
+        var v = vals[i] == null ? total : vals[i];
+        if (e.key === "ArrowUp" || e.key === "ArrowRight") { setVal(v + 1); e.preventDefault(); }
+        if (e.key === "ArrowDown" || e.key === "ArrowLeft") { setVal(v - 1); e.preventDefault(); }
+      });
+      inp.addEventListener("input", function () { if (inp.value === "") { vals[i] = null; draw(); save(); } else setVal(+inp.value); });
+      draw();
+    });
+  }
+
+  /* ---------- printing (Save as PDF) ---------- */
+  function preparePrint() {
+    document.querySelectorAll("textarea[data-key], input[data-key]").forEach(function (ta) {
+      if (ta.closest(".bar")) return;
+      var c = ta.nextElementSibling;
+      if (!c || !c.classList.contains("print-copy")) { c = document.createElement("div"); c.className = "print-copy"; ta.after(c); }
+      c.textContent = ta.value;
+    });
+  }
+  window.addEventListener("beforeprint", preparePrint);
+
+  /* ---------- bounded, compressed submission links ---------- */
+  var panel=document.getElementById("linkPanel"),out=document.getElementById("linkOut"),msg=document.getElementById("linkMsg"),copy=document.getElementById("btnCopy");
+  function invalidateLink() { out.value="";out.hidden=true;copy.disabled=true;if(!panel.hidden)msg.textContent="Answers changed. Generate a new link before submitting."; }
+  async function transform(bytes, decompress) {
+    var stream=new Blob([bytes]).stream().pipeThrough(decompress ? new DecompressionStream("gzip") : new CompressionStream("gzip"));
+    var reader=stream.getReader(),chunks=[],length=0;
+    var timer=setTimeout(()=>reader.cancel("Compression timed out"),3000);
+    try {
+      while(true) { var part=await reader.read();if(part.done)break;length+=part.value.length;if(length>MAX_BYTES)throw Error("Expanded worksheet exceeds 1 MB.");chunks.push(part.value); }
+      if(!length)throw Error("Empty compressed worksheet.");
+      var result=new Uint8Array(length),offset=0;chunks.forEach(c=>{result.set(c,offset);offset+=c.length;});return result;
+    } finally { clearTimeout(timer);reader.cancel().catch(()=>{}); }
+  }
+  async function encode() {
+    var bytes=await transform(new TextEncoder().encode(JSON.stringify(envelope())),false);
+    var binary="";bytes.forEach(b=>binary+=String.fromCharCode(b));return "v2."+btoa(binary).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");
+  }
+  async function decode(s) {
+    if(!/^v2\.[A-Za-z0-9_-]+$/.test(s))throw Error("Unsupported or malformed submission link.");
+    var binary=atob(s.slice(3).replace(/-/g,"+").replace(/_/g,"/"));
+    var bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+    return unpack(JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(await transform(bytes,true))));
+  }
+  function renderAll() {
+    bindFields();
+    document.querySelectorAll(".dtable").forEach(e=>{e.innerHTML="";buildDTable(e);});
+    document.querySelectorAll(".ftable").forEach(e=>{e.innerHTML="";buildFTable(e);});
+    document.querySelectorAll(".pieset").forEach(e=>{e.innerHTML="";buildPies(e);});
+    if(viewing)document.querySelectorAll("textarea[data-key], input[data-key]").forEach(e=>e.readOnly=true);
+  }
+  // Fields are bound once. Subsequent imports only refresh values and generated controls.
+  var fieldsBound=false;
+  var originalBind=bindFields;
+  bindFields=function() {
+    if(!fieldsBound) { originalBind();fieldsBound=true;return; }
+    document.querySelectorAll("textarea[data-key], input[data-key]").forEach(e=>{e.value=state[e.dataset.key]||"";grow(e);});
+  };
+  function download(text,name,type) {
+    var a=document.createElement("a"),url=URL.createObjectURL(new Blob([text],{type:type}));
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);
+  }
+  document.getElementById("btnBackup").addEventListener("click",function() {
+    try { var name=(state.name||"student").replace(/[^a-z0-9_-]+/gi,"_").slice(0,40); download(JSON.stringify(envelope()),"Nuclear_Chemistry_"+name+"_backup.json","application/json"); }
+    catch(e) { alert("Backup could not be created: "+e.message); }
+  });
+  document.getElementById("btnImport").addEventListener("click",()=>document.getElementById("backupFile").click());
+  document.getElementById("backupFile").addEventListener("change",async function(e) {
+    var f=e.target.files[0];if(!f||viewing||importBusy)return;importBusy=true;
+    try {
+      if(f.size>MAX_BYTES)throw Error("Backup exceeds the 1 MB file limit.");
+      var imported=unpack(JSON.parse(await f.text()));
+      if(!confirm("Replace current answers with this backup? Download your current JSON backup first if you want to keep both."))return;
+      // Validation and confirmation happen before replacing any answers.
+      var raw=JSON.stringify({format:FORMAT,savedAt:new Date().toISOString(),answers:imported});
+      localStorage.setItem(STORE_KEY,raw);lastRaw=raw;blocked=false;dirty=false;state=imported;
+      document.getElementById("btnReload").hidden=true;invalidateLink();renderAll();
+      document.getElementById("status").style.color="";setStatus("JSON backup restored and saved in this browser.");
+    } catch(err) { alert("Import failed; current answers were kept. "+err.message); }
+    finally {e.target.value="";importBusy=false;}
+  });
+  document.getElementById("btnReload").addEventListener("click",function() {
+    if(viewing) { location.hash="";location.reload();return; }
+    if(confirm("Load the saved browser copy? Download a JSON backup first to keep answers currently visible in this tab."))location.reload();
+  });
+  document.getElementById("btnPdf").addEventListener("click",function() { preparePrint();window.print(); });
+  document.getElementById("btnLink").addEventListener("click",async function() {
+    invalidateLink();panel.hidden=false;msg.textContent="Preparing experimental link…";
+    try {
+      if(!state.name||!state.name.trim())throw Error("Enter your name first.");
+      if(!/^https?:$/.test(location.protocol))throw Error("Links require a hosted HTTP(S) page. Use PDF while working from a downloaded file.");
+      if(typeof CompressionStream==="undefined")throw Error("This browser does not support compressed links. Use PDF instead.");
+      var snapshot=JSON.stringify(state),encoded=await encode();
+      if(snapshot!==JSON.stringify(state))throw Error("Answers changed while generating. Try again.");
+      var url=location.origin+location.pathname+"#s="+encoded;
+      if(url.length>MAX_LINK)throw Error("Link blocked: "+url.length.toLocaleString()+" characters exceeds the 8,000-character limit. Submit a PDF instead.");
+      // Round trip validation catches encoding errors before a link is offered.
+      if(JSON.stringify(validate(state))!==JSON.stringify(await decode(encoded)))throw Error("Link validation failed. Use PDF.");
+      if(snapshot!==JSON.stringify(state))throw Error("Answers changed while validating. Try again.");
+      out.value=url;out.hidden=false;copy.disabled=false;
+      msg.textContent="Experimental · "+url.length.toLocaleString()+" / 8,000 characters. Anyone with this link can read your name and answers; it is not encrypted. Canvas may reject or truncate it. Use only if your instructor accepts links; PDF is recommended. Regenerate after any changes.";
+    } catch(e) {out.value="";out.hidden=true;copy.disabled=true;msg.textContent=e.message;}
+  });
+  copy.addEventListener("click",async function() {
+    if(copy.disabled||!out.value)return;
+    out.select();try {await navigator.clipboard.writeText(out.value);msg.textContent="Copied. Only submit if your instructor accepts experimental links. Anyone with the link can read your work.";}
+    catch(e) {msg.textContent="Press Ctrl+C or Cmd+C to copy the selected link. Anyone with it can read your work.";}
+  });
+  document.getElementById("btnClose").addEventListener("click",()=>panel.hidden=true);
+  async function init() {
+    if(location.hash) {
+      viewing=true;
+      var banner=document.getElementById("viewBanner");banner.hidden=false;
+      try {
+        if(location.href.length>MAX_LINK||!location.hash.startsWith("#s="))throw Error("Oversized or unrecognized submission link.");
+        state=await decode(location.hash.slice(3));
+        banner.textContent="Submitted worksheet"+(state.name?" from "+state.name:"")+" · view only. This is a snapshot, not proof of Canvas submission.";
+        document.title="Nuclear Simulations: "+(state.name||"submission");
+        setStatus("Viewing a submission. Your browser’s saved progress is untouched.");
+      } catch(e) { state={};banner.textContent="Submission link could not be opened: "+e.message+" Ask for a PDF or a new link. Your saved browser progress is untouched.";errorStatus("Invalid submission link. No answers were loaded.");document.getElementById("btnPdf").disabled=true;document.getElementById("btnBackup").disabled=true; }
+      document.getElementById("btnLink").hidden=true;document.getElementById("btnImport").hidden=true;
+      document.getElementById("btnReload").hidden=false;document.getElementById("btnReload").textContent="Open my local worksheet";
+    } else { state=load();if(!blocked)setStatus(lastRaw?"Saved browser progress loaded.":"Ready. Changes save in this browser; download JSON backups regularly."); }
+    renderAll();
+  }
+  // Disable actions while an incoming submission is being checked.
+  document.querySelectorAll(".bar button").forEach(e=>e.disabled=true);
+  init().then(()=>document.querySelectorAll(".bar button").forEach(e=>{if(e.id!=="btnCopy" && !(viewing && !state.name && ["btnPdf","btnBackup"].includes(e.id)))e.disabled=false;}));
+
+})();
+</script>
+</body>
+</html>

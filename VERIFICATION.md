@@ -47,3 +47,7 @@ Tested October 31, 2026 using installed Google Chrome in headless mode on macOS.
 ## Limits
 
 No GitHub deployment, repository write, or live Canvas submission was performed. Canvas URL acceptance and PDF upload must be checked in the instructor's actual assignment. PhET links were preserved; interactive behavior of the externally hosted simulations was not tested. Browser checks were performed in Chrome, not Safari/Firefox or on physical mobile devices. The 390-pixel mobile layout was inspected in an emulated viewport. Browser storage is local and can be cleared; JSON backups remain necessary.
+
+## Appearance and navigation update
+
+Passed Chrome checks for light/dark switching and remembered choice, section buttons and remembered section, saving when continuing, retained answers across sections and reload, the final PDF action, and all-sections printing while one section was visible in dark mode. Extracted the actual PDF and confirmed all three sections and entered answers. The existing recovery, import/export, pie/table, and submission-link regression flows also passed. Student-facing button labels and messages do not expose the JSON format name.

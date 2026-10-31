@@ -2,11 +2,17 @@
 
 A buildless, unbranded CHMY 121 worksheet for GitHub Pages. All three parts, original question wording, embedded reference illustrations, editable pie charts, and dynamic tables from the supplied `nuclear-simulations.html` are retained. The earlier GitHub Pages prototype supplies the JSON progress-backup and recommended PDF-submission workflow.
 
+## Appearance and navigation
+
+Choose Light or Dark at the top. The initial appearance follows the device preference; the selected mode is remembered in this browser. Section buttons open Parts I, II, III or the complete worksheet. The last section is remembered too.
+
+Autosave is enabled by default and saves on every answer change. “Save and continue” confirms browser saving before advancing. If saving fails or another tab conflicts, it keeps the section open with recovery guidance. Students can download a progress file for another device or as a backup. The final section offers “Save and finish worksheet,” then directs students to the PDF submission button. Printing includes every section regardless of the active screen section, and always uses a light print layout.
+
 ## Students: save and submit
 
 1. Complete the worksheet while using the linked PhET simulations.
 2. Check the save status at the bottom. Work is stored in this browser and site address, not in an account or on a server. Private browsing, browser cleanup, changing addresses, or changing devices can remove or isolate it.
-3. Download **Save JSON backup** regularly. Use **Import JSON backup** to resume on another browser/device. Import asks before replacing current answers. JSON is a progress backup, not a PDF.
+3. Download **Save progress file** regularly. Use **Open progress file** to resume on another browser/device. Import asks before replacing current answers. JSON is a progress backup, not a PDF.
 4. **Recommended:** choose **Print / Save PDF · Recommended**, select Save as PDF in the browser/system print dialog, review all three parts, and upload the PDF file to Canvas. Turn off browser headers/footers if desired. This is one PDF; students do not need to ZIP it. The downloadable ZIP in this package is for deploying the website.
 5. Nothing is automatically sent to Canvas.
 

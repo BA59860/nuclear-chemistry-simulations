@@ -160,7 +160,7 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
 .science-note { font-size: .9rem; border-left: 3px solid var(--parent); padding-left: 10px; }
 @media print {
  @page { size: auto; margin: 15mm; }
- :root { --paper:#fff; --sheet:#fff; --ink:#000; --muted:#333; --rule:#aaa; --field:#fff; --parent:#1f6f78; --product:#d08a2c; color-scheme:light; }
+ :root, :root[data-theme], :root:not([data-theme="light"]) { --paper:#fff; --sheet:#fff; --ink:#000; --muted:#333; --rule:#aaa; --field:#fff; --parent:#1f6f78; --product:#d08a2c; color-scheme:light; }
  .sheet { margin:0; }
  input[data-key] { display:none; }
  .q, table.data { break-inside:auto; }
@@ -174,12 +174,29 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
  h2 { break-before:page; }
  h2:first-of-type { break-before:auto; }
 }
+
+.theme-controls { display:flex; justify-content:flex-end; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:18px; font-size:.85rem; }
+.theme-controls span { color:var(--muted); margin-right:4px; }
+button[aria-pressed="true"] { background:var(--parent); color:var(--sheet); border-color:var(--parent); }
+.section-nav { margin-top:22px; padding:14px; border:1px solid var(--rule); border-radius:6px; background:var(--field); }
+.section-nav > div { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.section-nav button { flex:1 1 160px; }
+#sectionStatus { font-size:.9rem; color:var(--muted); }
+.section-end { margin-top:30px; padding:18px; background:var(--field); border:1px solid var(--rule); border-radius:6px; }
+.section-end p { margin-bottom:12px; }
+.worksheet-section.is-hidden { display:none; }
+@media print {
+ .worksheet-section.is-hidden { display:block !important; }
+ .worksheet-section + .worksheet-section { break-before:page; }
+ .worksheet-section h2 { break-before:auto; }
+}
 </style>
 </head>
 <body>
 <main class="sheet" id="sheet">
   <div class="banner" id="viewBanner" hidden></div>
 
+  <div class="theme-controls no-print" role="group" aria-label="Appearance"><span>Appearance</span><button type="button" data-theme-choice="light" aria-pressed="false">Light</button><button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div>
   <h1>Nuclear Chemistry Simulation Worksheets</h1>
   <p class="course">CHMY 121 · Alpha decay, beta decay, half-life, and radioactive dating</p>
 
@@ -188,12 +205,13 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
   </div>
   <section class="directions no-print" aria-label="Save and submit instructions">
 <p><strong>Recommended submission: PDF → Canvas.</strong> Select <strong>Print / Save PDF</strong>, choose “Save as PDF” in the print dialog, check that all three parts and answers are included, then upload that PDF to Canvas. This page does not submit to Canvas automatically.</p>
-<p>Your work saves in this browser when storage is available. Download a <strong>JSON progress backup</strong> regularly and before changing browsers or devices. A backup is editable progress, not your submission PDF.</p>
+<p><strong>Autosave is on by default.</strong> Your answers save as you work in this browser when storage is available. You do not need to press Save between answers. Download a <strong>progress file</strong> regularly and before changing browsers or devices. A backup is editable progress, not your submission PDF.</p>
 <details><summary>Optional submission link — experimental</summary><p>Only use a link if your instructor accepts it. It contains your name and all answers; anyone with it can read them. Compression is not encryption. Links can enter browser history, synced history, clipboard tools, and Canvas. Long links may be truncated or rejected; links over 8,000 characters are blocked. PDF upload is more reliable. A new link is needed after any changes.</p></details>
 </section>
 
   <!-- ================= PART I ================= -->
-  <h2>Part I: Investigation of Alpha Decay via Simulation</h2>
+<nav class="section-nav no-print" aria-label="Worksheet sections"><p><strong>Work through all three sections.</strong> Your answers save automatically as you type.</p><div><button type="button" data-section="0" aria-pressed="false">Part I · Alpha decay</button><button type="button" data-section="1" aria-pressed="false">Part II · Beta decay</button><button type="button" data-section="2" aria-pressed="false">Part III · Radioactive dating</button><button type="button" data-section="all" aria-pressed="false">View all sections</button></div><p id="sectionStatus" role="status"></p></nav>
+<section class="worksheet-section" data-part="0" aria-label="Part I · Alpha decay">  <h2>Part I: Investigation of Alpha Decay via Simulation</h2>
   <p class="directions"><strong>Directions:</strong> Open the <a href="https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=alpha-decay" target="_blank" rel="noopener">Alpha Decay simulation</a> and use it to answer the following questions.</p>
 
   <h3>1. Investigating Alpha Decay:</h3>
@@ -253,7 +271,8 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
     <textarea data-key="p1_7" aria-label="Part I question 7 answer"></textarea></div></div>
 
   <!-- ================= PART II ================= -->
-  <h2>Part II: Investigation of Beta Decay via Simulation</h2>
+<div class="section-end no-print"><p>Ready for the next section? Your answers stay saved as you move.</p><button type="button" class="primary" data-next="1">Save and continue to Part II · Beta decay</button></div></section>
+<section class="worksheet-section" data-part="1" aria-label="Part II · Beta decay">  <h2>Part II: Investigation of Beta Decay via Simulation</h2>
   <p class="directions"><strong>Directions:</strong> Open the <a href="https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=beta-decay" target="_blank" rel="noopener">Beta Decay simulation</a> and use it to answer the following questions.</p>
 
   <h3>1. Investigating Beta Decay:</h3>
@@ -310,7 +329,8 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
     <textarea data-key="p2_3" aria-label="Part II question 3 answer"></textarea></div></div>
 
   <!-- ================= PART III ================= -->
-  <h2>Part III: Investigation of Radioactive Dating via Simulation</h2>
+<div class="section-end no-print"><p>Ready for the next section? Your answers stay saved as you move.</p><button type="button" class="primary" data-next="2">Save and continue to Part III · Radioactive dating</button></div></section>
+<section class="worksheet-section" data-part="2" aria-label="Part III · Radioactive dating">  <h2>Part III: Investigation of Radioactive Dating via Simulation</h2>
   <p class="directions"><strong>Directions:</strong> Open the <a href="https://phet.colorado.edu/sims/cheerpj/nuclear-physics/latest/nuclear-physics.html?simulation=radioactive-dating-game" target="_blank" rel="noopener">Radioactive Dating Game simulation</a> and use it to answer the following questions.</p>
 
   <div class="q"><span class="lbl">1.</span><div class="body">
@@ -337,6 +357,7 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
     <p>What type of nuclear reaction do carbon-14 and uranium-238 undergo? Explain how you figured this out and write the reaction for each.</p>
     <textarea data-key="p3_5" aria-label="Part III question 5 answer"></textarea></div></div>
 
+<div class="section-end no-print"><p>You have reached the final section. Save your work, then create your PDF to upload to Canvas.</p><button type="button" class="primary" data-next="finish">Save and finish worksheet</button></div></section>
   <p class="credit"><strong>Thanks to</strong> Trish Loeblein and Phil Cook, <strong>PhET Teaching Ideas and Activities:</strong> <a href="http://phet.colorado.edu/en/contributions/view/3221" target="_blank" rel="noopener">phet.colorado.edu/en/contributions/view/3221</a></p>
 </main>
 
@@ -344,8 +365,8 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
  <div class="bar-inner">
   <span class="status" id="status" role="status" aria-live="polite">Loading saved progress…</span>
   <button type="button" class="primary" id="btnPdf">Print / Save PDF · Recommended</button>
-  <button type="button" id="btnBackup">Save JSON backup</button>
-  <button type="button" id="btnImport">Import JSON backup</button>
+  <button type="button" id="btnBackup">Save progress file</button>
+  <button type="button" id="btnImport">Open progress file</button>
   <input type="file" id="backupFile" accept="application/json,.json" hidden>
   <button type="button" id="btnReload" hidden>Load saved browser copy</button>
   <button type="button" id="btnLink">Experimental submission link</button>
@@ -397,7 +418,7 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
   function envelope() { return {format:FORMAT,savedAt:new Date().toISOString(),answers:validate(state)}; }
   function unpack(v) { if(!plain(v)||v.format!==FORMAT||!plain(v.answers))throw Error("Not a compatible version-2 worksheet backup.");return validate(v.answers); }
   function errorStatus(t) { setStatus(t); document.getElementById("status").style.color="var(--warn-ink)"; }
-  function conflict() { blocked=true; errorStatus("Autosave paused: another tab changed the saved copy. Download your JSON backup, then load the saved browser copy."); document.getElementById("btnReload").hidden=false; }
+  function conflict() { blocked=true; errorStatus("Autosave paused: another tab changed the saved copy. Download a progress file, then load the saved browser copy."); document.getElementById("btnReload").hidden=false; }
 
 
   /* ---------- storage ---------- */
@@ -409,7 +430,7 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
       return parsed.format === FORMAT ? unpack(parsed) : validate(parsed);
     } catch(e) {
       blocked = true;
-      errorStatus("Saved progress could not be read. It has been left untouched. Import a JSON backup or download your current work before closing.");
+      errorStatus("Saved progress could not be read. It has been left untouched. Import a progress file or download your current work before closing.");
       return {};
     }
   }
@@ -425,7 +446,7 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
       lastRaw=raw; dirty=false;
       document.getElementById("status").style.color="";
       setStatus("Saved in this browser · " + new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}));
-    } catch(e) { errorStatus("Autosave unavailable: " + e.message + " Download a JSON backup now; keep this page open."); }
+    } catch(e) { errorStatus("Autosave unavailable: " + e.message + " Download a progress file now; keep this page open."); }
   }
   function setStatus(t) { document.getElementById("status").textContent=t; }
   window.addEventListener("storage", function(e) { if(!viewing && (e.key===STORE_KEY || e.key===null) && e.newValue!==lastRaw) conflict(); });
@@ -653,18 +674,18 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
     try {
       if(f.size>MAX_BYTES)throw Error("Backup exceeds the 1 MB file limit.");
       var imported=unpack(JSON.parse(await f.text()));
-      if(!confirm("Replace current answers with this backup? Download your current JSON backup first if you want to keep both."))return;
+      if(!confirm("Replace current answers with this backup? Download your current progress file first if you want to keep both."))return;
       // Validation and confirmation happen before replacing any answers.
       var raw=JSON.stringify({format:FORMAT,savedAt:new Date().toISOString(),answers:imported});
       localStorage.setItem(STORE_KEY,raw);lastRaw=raw;blocked=false;dirty=false;state=imported;
       document.getElementById("btnReload").hidden=true;invalidateLink();renderAll();
-      document.getElementById("status").style.color="";setStatus("JSON backup restored and saved in this browser.");
+      document.getElementById("status").style.color="";setStatus("Progress file opened and saved in this browser.");
     } catch(err) { alert("Import failed; current answers were kept. "+err.message); }
     finally {e.target.value="";importBusy=false;}
   });
   document.getElementById("btnReload").addEventListener("click",function() {
     if(viewing) { location.hash="";location.reload();return; }
-    if(confirm("Load the saved browser copy? Download a JSON backup first to keep answers currently visible in this tab."))location.reload();
+    if(confirm("Load the saved browser copy? Download a progress file first to keep answers currently visible in this tab."))location.reload();
   });
   document.getElementById("btnPdf").addEventListener("click",function() { preparePrint();window.print(); });
   document.getElementById("btnLink").addEventListener("click",async function() {
@@ -690,6 +711,38 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
     catch(e) {msg.textContent="Press Ctrl+C or Cmd+C to copy the selected link. Anyone with it can read your work.";}
   });
   document.getElementById("btnClose").addEventListener("click",()=>panel.hidden=true);
+  /* ---------- appearance and section navigation ---------- */
+  var currentSection="0";
+  function uiRead(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
+  function uiWrite(key,value) { try { localStorage.setItem(key,value); } catch(e) {} }
+  function setTheme(theme) {
+    document.documentElement.dataset.theme=theme;
+    document.querySelectorAll("[data-theme-choice]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.themeChoice===theme)));
+  }
+  setTheme(uiRead("nuclear-worksheet-theme") || (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  document.querySelectorAll("[data-theme-choice]").forEach(b=>b.addEventListener("click",()=>{setTheme(b.dataset.themeChoice);uiWrite("nuclear-worksheet-theme",b.dataset.themeChoice);}));
+  function showSection(which, moveFocus) {
+    if(!["0","1","2","all"].includes(which)) which="0";
+    currentSection=which;
+    document.querySelectorAll(".worksheet-section").forEach(e=>e.classList.toggle("is-hidden",which!=="all" && e.dataset.part!==which));
+    document.querySelectorAll("[data-section]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.section===which)));
+    document.getElementById("sectionStatus").textContent=which==="all"?"Showing all three sections.":"Section "+(+which+1)+" of 3 · "+["Alpha decay","Beta decay","Radioactive dating"][+which];
+    if(!viewing)uiWrite("nuclear-worksheet-section",which);
+    document.querySelectorAll("textarea[data-key]").forEach(grow);
+    if(moveFocus) {
+      var heading=document.querySelector(which==="all"?".section-nav":".worksheet-section[data-part='"+which+"'] h2");
+      heading.tabIndex=-1;heading.focus({preventScroll:true});heading.scrollIntoView({block:"start"});
+    }
+  }
+  document.querySelectorAll("[data-section]").forEach(b=>b.addEventListener("click",()=>{if(!viewing)save();showSection(b.dataset.section,true);}));
+  document.querySelectorAll("[data-next]").forEach(b=>b.addEventListener("click",()=>{
+    if(!viewing) {
+      save();
+      if(dirty) { var status=document.getElementById("status");status.tabIndex=-1;status.focus();alert("Your answers are still on this page, but browser saving is unavailable or paused. Save a progress file before continuing. Use the section buttons to move when ready.");return; }
+    }
+    if(b.dataset.next==="finish") { document.getElementById("btnPdf").focus();setStatus(viewing?"Print this snapshot as a PDF, then upload it to Canvas.":"All current answers saved. Next: Print / Save PDF, review the PDF, then upload it to Canvas."); }
+    else showSection(b.dataset.next,true);
+  }));
   async function init() {
     if(location.hash) {
       viewing=true;
@@ -703,8 +756,10 @@ img.figure { display: block; max-width: 160px; height: auto; margin: 8px 0; bord
       } catch(e) { state={};banner.textContent="Submission link could not be opened: "+e.message+" Ask for a PDF or a new link. Your saved browser progress is untouched.";errorStatus("Invalid submission link. No answers were loaded.");document.getElementById("btnPdf").disabled=true;document.getElementById("btnBackup").disabled=true; }
       document.getElementById("btnLink").hidden=true;document.getElementById("btnImport").hidden=true;
       document.getElementById("btnReload").hidden=false;document.getElementById("btnReload").textContent="Open my local worksheet";
-    } else { state=load();if(!blocked)setStatus(lastRaw?"Saved browser progress loaded.":"Ready. Changes save in this browser; download JSON backups regularly."); }
+    } else { state=load();if(!blocked)setStatus(lastRaw?"Saved browser progress loaded.":"Ready. Changes save in this browser; download progress files regularly."); }
     renderAll();
+    showSection(viewing?"all":uiRead("nuclear-worksheet-section")||"0",false);
+    if(viewing)document.querySelectorAll("[data-next]").forEach(b=>b.textContent=b.dataset.next==="finish"?"Finish · Print / Save PDF":"Continue to next section");
   }
   // Disable actions while an incoming submission is being checked.
   document.querySelectorAll(".bar button").forEach(e=>e.disabled=true);
